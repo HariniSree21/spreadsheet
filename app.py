@@ -154,14 +154,22 @@ if sheet_url:
 
     except Exception as e:
         error_message = str(e)
-        if "The caller does not have permission" in error_message or "403" in error_message:
-            st.error("🚫 It looks like your Google Sheet isn't shared with the service account.")
-            st.markdown("""
-            Please make sure you've shared the sheet with:
+    
+        st.error("❌ Something went wrong while trying to access the Google Sheet.")
+        st.code(error_message)
 
-            **`spreadsheetapp-456811@spreadsheetapp-456811.iam.gserviceaccount.com`**
+        # Friendly reminder regardless of the exact error
+        st.markdown("""
+        ### ℹ️ Possible Cause:
+        - You might have forgotten to **share your Google Sheet** with the required service account.
 
-            _To do this: Open your Google Sheet → Click **Share** → Paste the email above → Click **Send**._
-            """)
-        else:
-            st.error(f"❌ An unexpected error occurred: `{e}`")
+        #### ✅ To fix this:
+        1. Open your Google Sheet.
+        2. Click **Share** in the top-right corner.
+        3. Add this email:  
+        **`spreadsheetapp-456811@spreadsheetapp-456811.iam.gserviceaccount.com`**
+        4. Give it Viewer or Editor access.
+        5. Click **Send**.
+
+        _Make sure you're using the correct Google Sheet URL as well._
+        """)
