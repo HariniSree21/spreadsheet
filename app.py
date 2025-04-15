@@ -4,6 +4,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
 import requests
 import re
+import os
+import json  # Import the json module
 
 # 🎯 Function to fetch data using LeetCode GraphQL API
 def get_leetcode_stats(username):
@@ -55,11 +57,12 @@ scope = [
     "https://www.googleapis.com/auth/drive"
 ]
 
-creds = ServiceAccountCredentials.from_json_keyfile_name(
-    "spreadsheetapp-456811-50518141e80c.json", scope
-)
-client = gspread.authorize(creds)
+# Fetch credentials from the environment variable
+json_str = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
+json_data = json.loads(json_str)  # Parse the JSON data
 
+creds = ServiceAccountCredentials.from_json_keyfile_dict(json_data, scope)
+client = gspread.authorize(creds)
 
 # 📝 UI
 st.title("📊 LeetCode Stats Updater from Google Sheet")
@@ -69,10 +72,8 @@ st.markdown("""
 1. Ensure your Google Sheet contains a column with LeetCode profile links in this format:
 https://leetcode.com/u/your_username/
 
-
 2. Share your Google Sheet with this service account email:
-
-
+spreadsheetapp-456811@spreadsheetapp-456811.iam.gserviceaccount.com
 
 _(Click on share button to the right top of your google spreadsheet and add the above email)_
 
