@@ -58,7 +58,7 @@ scope = [
 ]
 
 # Fetch credentials from the environment variable
-json_str = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
+json_str = st.secrets["GOOGLE_SERVICE_ACCOUNT_JSON"]
 json_data = json.loads(json_str)  # Parse the JSON data
 
 creds = ServiceAccountCredentials.from_json_keyfile_dict(json_data, scope)
