@@ -154,16 +154,16 @@ if sheet_url:
                 st.success("✅ Sheet updated successfully!")
 
         except Exception as e:
-        error_message = str(e)
-        if "The caller does not have permission" in error_message or "403" in error_message:
-            st.error("🚫 It looks like your Google Sheet isn't shared with the service account.")
-            st.markdown("""
-            Please make sure you've shared the sheet with:
+            error_message = str(e)
+            if "The caller does not have permission" in error_message or "403" in error_message:
+                st.error("🚫 It looks like your Google Sheet isn't shared with the service account.")
+                st.markdown("""
+                Please make sure you've shared the sheet with:
 
-            **`spreadsheetapp-456811@spreadsheetapp-456811.iam.gserviceaccount.com`**
+                **`spreadsheetapp-456811@spreadsheetapp-456811.iam.gserviceaccount.com`**
 
-            _To do this: Open your Google Sheet → Click **Share** → Paste the email above → Click **Send**._
-            """)
-        else:
-            st.error(f"❌ An unexpected error occurred: {e}")
+                _To do this: Open your Google Sheet → Click **Share** → Paste the email above → Click **Send**._
+                """)
+            else:
+                st.error(f"❌ An unexpected error occurred: {e}")
 
