@@ -122,7 +122,6 @@ if sheet_url:
                 match = re.search(r"leetcode\.com/u/([^/\s]+)/?", leetcode_url)
                 leetcode_user = match.group(1) if match else ""
 
-
                 if gmail and leetcode_user:
                     stats = get_leetcode_stats(leetcode_user)
                     if stats:
@@ -153,17 +152,16 @@ if sheet_url:
                 worksheet.update([headers] + rows)
                 st.success("✅ Sheet updated successfully!")
 
-        except Exception as e:
-            error_message = str(e)
-            if "The caller does not have permission" in error_message or "403" in error_message:
-                st.error("🚫 It looks like your Google Sheet isn't shared with the service account.")
-                st.markdown("""
-                Please make sure you've shared the sheet with:
+    except Exception as e:
+        error_message = str(e)
+        if "The caller does not have permission" in error_message or "403" in error_message:
+            st.error("🚫 It looks like your Google Sheet isn't shared with the service account.")
+            st.markdown("""
+            Please make sure you've shared the sheet with:
 
-                **`spreadsheetapp-456811@spreadsheetapp-456811.iam.gserviceaccount.com`**
+            **`spreadsheetapp-456811@spreadsheetapp-456811.iam.gserviceaccount.com`**
 
-                _To do this: Open your Google Sheet → Click **Share** → Paste the email above → Click **Send**._
-                """)
-            else:
-                st.error(f"❌ An unexpected error occurred: {e}")
-
+            _To do this: Open your Google Sheet → Click **Share** → Paste the email above → Click **Send**._
+            """)
+        else:
+            st.error(f"❌ An unexpected error occurred: `{e}`")
