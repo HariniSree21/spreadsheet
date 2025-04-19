@@ -73,7 +73,7 @@ st.markdown("""
 https://leetcode.com/u/your_username/
 
 2. Share your Google Sheet with this service account email:
-spreadsheetapp-456811@spreadsheetapp-456811.iam.gserviceaccount.com
+sheet-access21@spreadsheetapp-456811.iam.gserviceaccount.com
 
 _(Click on share button to the right top of your google spreadsheet and add the above email)_
 
